@@ -27,9 +27,9 @@ export default function SignUpPage() {
   }
 
     const URL =
-      "https:// url do back aqui";
+      "http://localhost:5000/participants";
 
-    const novocadastro = { email, password };
+    const novocadastro = { name: name, email: email, password: password };
 
     const promise = axios.post(URL, novocadastro);
 
@@ -73,7 +73,7 @@ export default function SignUpPage() {
         <input
           type="password"
           placeholder="Senha"
-          autocomplete="new-password"
+          autoComplete="new-password"
           required
           disabled={disable}
           value={password}
@@ -83,7 +83,7 @@ export default function SignUpPage() {
         <input
           type="password"
           placeholder="Confirme a senha"
-          autocomplete="new-password"
+          autoComplete="new-password"
           required
           disabled={disable}
           value={passwordagain}
