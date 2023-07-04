@@ -40,7 +40,7 @@ export default function SignUpPage() {
     });
 
     promise.catch((erro) => {
-      alert(erro.response.data.message);
+      alert(erro.response.data);
       setDisable(false)
       console.log("erro em: POST no Cadastro:", erro);
     });
