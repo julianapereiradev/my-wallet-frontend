@@ -17,12 +17,12 @@ export default function SignInPage() {
     e.preventDefault();
     setDisable(true);
 
-    const URL =
-      "http://localhost:5000/user";
+    // const URL =
+    //   "http://localhost:5000/user";
 
     const novocadastro = { email: email, password: password };
 
-    const promise = axios.post(URL, novocadastro);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/user`, novocadastro);
 
     promise.then((resposta) => {
       console.log("resposta.data em: POST no Login:", resposta.data);

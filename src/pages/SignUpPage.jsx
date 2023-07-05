@@ -27,12 +27,12 @@ export default function SignUpPage() {
     return; // Retorna sem fazer a requisição
   }
 
-    const URL =
-      "http://localhost:5000/participants";
+    // const URL =
+    //   "http://localhost:5000/participants";
 
     const novocadastro = { name: name, email: email, password: password };
 
-    const promise = axios.post(URL, novocadastro);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/participants`, novocadastro);
 
     promise.then((resposta) => {
       console.log("resposta.data em: POST no Cadastro:", resposta.data);
