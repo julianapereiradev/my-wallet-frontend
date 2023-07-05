@@ -7,6 +7,7 @@ import axios from "axios";
 
 
 export default function SignUpPage() {
+  
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -35,6 +36,7 @@ export default function SignUpPage() {
 
     promise.then((resposta) => {
       console.log("resposta.data em: POST no Cadastro:", resposta.data);
+      alert("Usuário criado");
       navigate("/");
       setDisable(false)
     });
