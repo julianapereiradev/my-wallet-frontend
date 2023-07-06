@@ -36,7 +36,7 @@ export default function SignUpPage() {
 
     promise.then((resposta) => {
       console.log("resposta.data em: POST no Cadastro:", resposta.data);
-      alert("Usuário criado");
+      alert("Usuário criado com sucesso!");
       navigate("/");
       setDisable(false)
     });

@@ -1,13 +1,16 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import {UserContext} from "../context/UserContext";
 
 export default function SignInPage() {
 
   const navigate = useNavigate();
+
+  const {user, setUser} = useContext(UserContext)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +28,13 @@ export default function SignInPage() {
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/user`, novocadastro);
 
     promise.then((resposta) => {
-      console.log("resposta.data em: POST no Login:", resposta.data);
+      const {name, token, userID} = resposta.data
+      setUser({name: name, token: token, userID: userID})
+      localStorage.setItem("user", JSON.stringify({name: name, token: token, userID: userID}))
+
       navigate("/home");
       setDisable(false)
+      console.log("resposta.data em: POST no Login:", resposta.data);
     });
 
     promise.catch((erro) => {
