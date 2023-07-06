@@ -19,7 +19,7 @@ export default function HomePage() {
     const config = {
         headers: { "Authorization": `Bearer ${user.token}` }
     }
-    axios.get(`${import.meta.env.VITE_API_URL}/operations`, config)
+    axios.get(`${import.meta.env.VITE_API_URL}/transaction`, config)
         .then((res) => {
             const transitions = res.data;
             console.log("res.data de operations in home:", res.data)

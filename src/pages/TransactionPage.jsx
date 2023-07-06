@@ -22,7 +22,7 @@ function newTransition(e){
       headers: {"Authorization": `Bearer ${user.token}`}
   };
 
-  axios.post(`${import.meta.env.VITE_API_URL}/operations`, {value: parseFloat(value), description: description, type: tipo}, config)
+  axios.post(`${import.meta.env.VITE_API_URL}/transaction`, {value: parseFloat(value), description: description, type: tipo}, config)
   .then((res) => {
       console.log("Operação feita com sucesso!");
       console.log('res.data de POST operation', res.data)
