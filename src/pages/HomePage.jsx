@@ -1,19 +1,55 @@
 import styled from "styled-components"
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 import { UserContext } from "../context/UserContext";
+import axios from "axios";
+import ItemTransaction from "../components/ItemTransaction";
 
 export default function HomePage() {
   const {user, setUser} = useContext(UserContext)
   const navigate = useNavigate();
+
+  const [listTransaction, setListTransaction] = useState([]);
+  
+  let total = 0;
+
+  useEffect(() => {
+    const config = {
+        headers: { "Authorization": `Bearer ${user.token}` }
+    }
+    axios.get(`${import.meta.env.VITE_API_URL}/operations`, config)
+        .then((res) => {
+            const transitions = res.data;
+            console.log("res.data de operations in home:", res.data)
+            setListTransaction(transitions.filter(u => u.idUser === user.userID));
+        })
+        .catch(res => console.log(res));
+
+}, []);
+console.log('listTransaction aqui:', listTransaction)
+
 
   function logout() {
     localStorage.removeItem("user");
     setUser({ name: "", token: "", userID: "" });
     navigate('/');
   }
+
+  function calculateTotal() {
+    total = 0;
+  
+    for (let i = 0; i < listTransaction.length; i++) {
+      if (listTransaction[i].type === 'entrada') {
+        total = total + listTransaction[i].value;
+      } else if (listTransaction[i].type === 'saida') {
+        total = total - listTransaction[i].value;
+      }
+    }
+    return total;
+  }
+  calculateTotal()
 
   return (
     <HomeContainer>
@@ -22,31 +58,26 @@ export default function HomePage() {
         <BiExit onClick={logout}/>
       </Header>
 
-      <TransactionsContainer>
+{!(listTransaction.length === 0) ? (<TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          {listTransaction.map((item, index) =>
+          <ItemTransaction
+          key={index} 
+          date={item.date}
+          value={item.value}
+          description={item.description}
+          type={item.type}
+          /> )}
         </ul>
 
-        <article>
+        <Total color={total > 0 ? "#03AC00" : "#C70000"}>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
-        </article>
-      </TransactionsContainer>
-
+          <p className="value">{
+                            Math.abs(total).toLocaleString('pt-br', {
+                                style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
+                            })}</p>
+        </Total>
+      </TransactionsContainer>): (<TransactionsContainer><p>Não há registros de entrada ou saída</p></TransactionsContainer>)}
 
       <ButtonsContainer>
         <button onClick={() => navigate('/nova-transacao/entrada')}>
@@ -114,20 +145,11 @@ const ButtonsContainer = styled.section`
     }
   }
 `
-const Value = styled.div`
-  font-size: 16px;
+const Total = styled.article`
+
+    p.value{
+      font-size: 16px;
   text-align: right;
-  color: ${(props) => (props.color === "positivo" ? "green" : "red")};
-`
-const ListItemContainer = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  color: #000000;
-  margin-right: 10px;
-  div span {
-    color: #c6c6c6;
-    margin-right: 10px;
-  }
-`
+        color: ${props => props.color};
+    }
+`;
