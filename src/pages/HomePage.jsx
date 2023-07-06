@@ -49,11 +49,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button>
+        <button onClick={() => navigate('/nova-transacao/entrada')}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button onClick={() => navigate('/nova-transacao/saida')}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
