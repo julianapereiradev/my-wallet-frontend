@@ -117,9 +117,17 @@ const TransactionsContainer = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+
+  ul {
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+
   article {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;
+    
     strong {
       font-weight: 700;
       text-transform: uppercase;
