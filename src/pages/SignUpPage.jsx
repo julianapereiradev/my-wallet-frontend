@@ -52,6 +52,7 @@ export default function SignUpPage() {
         <MyWalletLogo />
 
         <input
+          data-test="name"
           type="text"
           placeholder="Nome"
           required
@@ -61,6 +62,7 @@ export default function SignUpPage() {
         />
 
         <input
+          data-test="email"
           type="email"
           placeholder="E-mail"
           required
@@ -70,6 +72,7 @@ export default function SignUpPage() {
         />
 
         <input
+          data-test="password"
           type="password"
           placeholder="Senha"
           autoComplete="new-password"
@@ -80,6 +83,7 @@ export default function SignUpPage() {
         />
 
         <input
+          data-test="conf-password"
           type="password"
           placeholder="Confirme a senha"
           autoComplete="new-password"
@@ -89,7 +93,11 @@ export default function SignUpPage() {
           onChange={(e) => setPasswordagain(e.target.value)}
         />
 
-        <button type="submit" disabled={disable}>
+        <button
+        data-test="sign-up-submit" 
+        type="submit" 
+        disabled={disable}
+        >
           {disable ? (
             <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
           ) : (

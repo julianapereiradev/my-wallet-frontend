@@ -41,7 +41,8 @@ function newTransition(e){
           <h1>Nova entrada</h1>
           <form onSubmit={newTransition}>
 
-            <input 
+            <input
+            data-test="registry-amount" 
             placeholder="Valor" 
             type='number'
             required={true}
@@ -49,7 +50,8 @@ function newTransition(e){
             onChange={(e) => !isNaN(e.target.value) ? setValue(e.target.value) : setValue('')} 
             />
 
-            <input 
+            <input
+            data-test="registry-name-input" 
             placeholder="Descrição" 
             type="text"
             required={true}
@@ -57,7 +59,7 @@ function newTransition(e){
             onChange={(e) => setDescription(e.target.value)} 
             />
 
-            <button type="submit">Salvar entrada</button>
+            <button type="submit" data-test="registry-save">Salvar entrada</button>
 
           </form>
         </TransactionsContainer>) 

@@ -47,6 +47,7 @@ export default function SignInPage() {
         <MyWalletLogo />
 
         <input
+          data-test="email"
           type="email"
           placeholder="E-mail"
           required
@@ -56,6 +57,7 @@ export default function SignInPage() {
         />
 
         <input
+          data-test="password"
           type="password"
           placeholder="Senha"
           autoComplete="new-password"
@@ -65,7 +67,11 @@ export default function SignInPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit" disabled={disable}>
+        <button
+        data-test="sign-in-submit" 
+        type="submit" 
+        disabled={disable}
+        >
           {disable ? (
             <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
           ) : (

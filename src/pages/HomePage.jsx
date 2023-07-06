@@ -54,8 +54,8 @@ console.log('listTransaction aqui:', listTransaction)
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {user.name} </h1>
-        <BiExit onClick={logout}/>
+        <h1 data-test="user-name">Olá, {user.name} </h1>
+        <BiExit onClick={logout} data-test="logout"/>
       </Header>
 
 {!(listTransaction.length === 0) ? (<TransactionsContainer>
@@ -72,7 +72,7 @@ console.log('listTransaction aqui:', listTransaction)
 
         <Total color={total > 0 ? "#03AC00" : "#C70000"}>
           <strong>Saldo</strong>
-          <p className="value">{
+          <p className="value" data-test="total-amount">{
                             Math.abs(total).toLocaleString('pt-br', {
                                 style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
                             })}</p>
@@ -80,11 +80,11 @@ console.log('listTransaction aqui:', listTransaction)
       </TransactionsContainer>): (<TransactionsContainer><p>Não há registros de entrada ou saída</p></TransactionsContainer>)}
 
       <ButtonsContainer>
-        <button onClick={() => navigate('/nova-transacao/entrada')}>
+        <button onClick={() => navigate('/nova-transacao/entrada')} data-test="new-income">
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={() => navigate('/nova-transacao/saida')}>
+        <button onClick={() => navigate('/nova-transacao/saida')} data-test="new-expense">
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

@@ -5,9 +5,12 @@ export default function ItemTransaction({ date, description, value, type }) {
         <ListItemContainer>
             <div>
               <span>{date}</span>
-              <strong>{description}</strong>
+              <strong data-test="registry-name">{description}</strong>
             </div>
-            <Value color={type == "entrada" ? "#03AC00" : "#C70000"}>{
+            <Value
+            data-test="registry-amount" 
+            color={type == "entrada" ? "#03AC00" : "#C70000"}
+            >{
                 Number(value).toLocaleString('pt-br', {
                     style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
                 })}</Value>
