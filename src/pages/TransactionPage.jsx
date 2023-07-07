@@ -29,8 +29,8 @@ function newTransition(e){
       navigate('/home');
   })
   .catch((res) => {
-      console.log(res);
-      alert(res);
+      console.log('error in /transaction',res.response.data);
+      alert(res.response.data);
   })
 }
 
