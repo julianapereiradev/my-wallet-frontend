@@ -60,7 +60,7 @@ console.log('listTransaction aqui:', listTransaction)
 
 {!(listTransaction.length === 0) ? (<TransactionsContainer>
         <ul>
-          {listTransaction.map((item, index) =>
+          {listTransaction.slice().reverse().map((item, index) =>
           <ItemTransaction
           key={index} 
           date={item.date}
@@ -74,7 +74,7 @@ console.log('listTransaction aqui:', listTransaction)
           <strong>Saldo</strong>
           <p className="value" data-test="total-amount">{
                             Math.abs(total).toLocaleString('pt-br', {
-                                style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
+                                style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false
                             })}</p>
         </Total>
       </TransactionsContainer>): (<TransactionsContainer><p>Não há registros de entrada ou saída</p></TransactionsContainer>)}
