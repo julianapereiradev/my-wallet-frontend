@@ -13,7 +13,7 @@ export default function UserProvider({children}) {
 
     useEffect(() => {
         
-      if(lsUser === undefined && location.pathname == '/home' || lsUser === undefined && location.pathName == '/nova-transacao/:tipo')
+      if((lsUser === undefined || lsUser === null) && location.pathname == '/home' || (lsUser === undefined || lsUser === null) && (location.pathname == '/nova-transacao/entrada' || location.pathname == '/nova-transacao/saida'))
         {
           navigate('/');
         }
