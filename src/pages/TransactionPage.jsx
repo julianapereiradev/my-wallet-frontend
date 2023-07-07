@@ -42,7 +42,7 @@ function newTransition(e){
           <form onSubmit={newTransition}>
 
             <input
-            data-test="registry-amount" 
+            data-test="registry-amount-input" 
             placeholder="Valor" 
             type='number'
             required={true}
@@ -68,7 +68,8 @@ function newTransition(e){
           <h1>Nova saída</h1>
           <form onSubmit={newTransition}>
 
-            <input 
+            <input
+            data-test="registry-amount-input"
             placeholder="Valor" 
             type='number'
             required={true}
@@ -77,14 +78,15 @@ function newTransition(e){
             />
 
             <input 
-            placeholder="Descrição" 
+            placeholder="Descrição"
+            data-test="registry-name-input" 
             type="text"
             required={true}
             value={description}
             onChange={(e) => setDescription(e.target.value)} 
             />
 
-            <button type="submit">Salvar saída</button>
+            <button type="submit" data-test="registry-save">Salvar saída</button>
 
           </form>
         </TransactionsContainer>)
