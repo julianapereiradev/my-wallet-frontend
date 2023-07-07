@@ -10,10 +10,9 @@ export default function ItemTransaction({ date, description, value, type }) {
             <Value
             data-test="registry-amount" 
             color={type == "entrada" ? "#03AC00" : "#C70000"}
-            >{
-                Number(value).toLocaleString('pt-br', {
-                    style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
-                })}</Value>
+            >
+  {Number(value).toLocaleString('pt-br', {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: false})}
+            </Value>
           </ListItemContainer>
     )
 }
