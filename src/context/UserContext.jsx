@@ -13,12 +13,9 @@ export default function UserProvider({children}) {
 
     useEffect(() => {
         
-        if (lsUser === null && location.pathname !== '/cadastro') {
+      if(lsUser === undefined && location.pathname == '/home' || lsUser === undefined && location.pathName == '/nova-transacao/:tipo')
+        {
           navigate('/');
-        } else if (lsUser === null && location.pathname === '/cadastro') {
-         console.log("Consegue mudar para a tela de cadastro escrevendo na URL")
-        } else {
-          navigate('/home');
         }
       }, []);
 
